@@ -10,3 +10,7 @@ Because you need root access to build containers, all of the work to make and bu
 ## Lorwyn - lorwynBuildFiles
 
 I am hope that I can keep this container as a sort of general catch all for many needs. I built it off of a container on docker: https://hub.docker.com/r/pytorch/pytorch and then added some python packages with 3d mesh tools on top of that.
+
+## Tarkir - tarkirBuildFIles
+
+R, built off tidyverse container on docker. Also includes some of my commonly used packages.
