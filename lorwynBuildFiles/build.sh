@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo docker build -t lorwyn ./
+sudo docker build --no-cache -t lorwyn ./
