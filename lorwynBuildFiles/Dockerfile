@@ -24,7 +24,34 @@ RUN apt-get update && \
         software-properties-common \
         dirmngr \
         gnupg \
-        ca-certificates && \
+        ca-certificates \
+	libwebp-dev \
+        \
+        # Common libraries required by CRAN packages
+        libcurl4-openssl-dev \
+        libssl-dev \
+        libxml2-dev \
+        libuv1-dev \
+        libgit2-dev \
+        \
+        # Graphics and font libraries
+        libcairo2-dev \
+        libfontconfig1-dev \
+        libfreetype6-dev \
+        libharfbuzz-dev \
+        libfribidi-dev \
+        libpng-dev \
+        libjpeg-dev \
+        libtiff5-dev \
+        libx11-dev \
+        \
+        # Frequently required by R packages
+        libicu-dev \
+        zlib1g-dev \
+        libbz2-dev \
+        liblzma-dev \
+        libreadline-dev && \
+    \
     # Add CRAN GPG key and repository
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 51716619E084DAB9 && \
     add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/" && \
@@ -57,4 +84,4 @@ RUN pip install --no-cache-dir snakemake \
     graphviz
 
 #install R packages
-RUN R -e "install.packages(c('tidyverse','data.table'), repos='https://cloud.r-project.org')"
+RUN R -e "install.packages(c('tidyverse','data.table', 'devtools'), repos='https://cloud.r-project.org')"
