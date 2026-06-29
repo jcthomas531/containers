@@ -33,6 +33,8 @@ RUN apt-get update && \
         libxml2-dev \
         libuv1-dev \
         libgit2-dev \
+	libopenblas0 \
+	libopenblas-dev \
         \
         # Graphics and font libraries
         libcairo2-dev \
@@ -84,4 +86,5 @@ RUN pip install --no-cache-dir snakemake \
     graphviz
 
 #install R packages
-RUN R -e "install.packages(c('tidyverse','data.table', 'devtools'), repos='https://cloud.r-project.org')"
+RUN R -e "install.packages(c('tidyverse','data.table', 'devtools', 'vcdExtra'), repos='https://cloud.r-project.org')"
+#next time add Hmisc, kableExtra, arsenal, gtsummary
