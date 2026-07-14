@@ -11,6 +11,20 @@ Because you need root access to build containers, all of the work to make and bu
 
 I am hope that I can keep this container as a sort of general catch all for many needs. I built it off of a container on docker: https://hub.docker.com/r/pytorch/pytorch and then added some python packages with 3d mesh tools on top of that.
 
+This is also able to run my package mysticOwl.
+
 ## Tarkir - tarkirBuildFIles
 
 R, built off tidyverse container on docker. Also includes some of my commonly used packages.
+
+## lorwyn_eclipsed - lorwyn_eclipsedBuildFiles
+
+Built off a copy of lorwyn at commit 3028374. Added some additional development software needed to build a specific package from a github repo (https://github.com/amueller/gco_python).
+
+This container was made to facilitate pygco specifically. Once the container is built and you have the .sif, do the following IN THE CONTAINER to make pygco available as a python package:
+
+* clone the repo to the location you want it (somewhere convinient bc you will have to update your sys path to find it when you want to use this package). The command is: "git clone https://github.com/amueller/gco_python.git"
+* navigate into that cloned repo. The command is: "cs gco_python"
+* run the make file. The command is "make"
+
+Now you can use this package.
