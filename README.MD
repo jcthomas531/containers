@@ -25,6 +25,6 @@ This container was made to facilitate pygco specifically. Once the container is 
 
 * clone the repo to the location you want it (somewhere convinient bc you will have to update your sys path to find it when you want to use this package). The command is: "git clone https://github.com/amueller/gco_python.git"
 * navigate into that cloned repo. The command is: "cs gco_python"
-* run the make file. The command is "make"
+* run the make file. The command is "make". NOTE: this will print a lot of warning messages but do not frett, it does work!
 
-Now you can use this package.
+Now you can use this package. 
