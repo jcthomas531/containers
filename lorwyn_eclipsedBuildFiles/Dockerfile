@@ -18,6 +18,11 @@ RUN apt-get update && \
         apt-utils \
         git \
         vim \
+	#
+	#new
+	libosmesa6 \
+	libosmesa6-dev \
+	#
         libgl1 \
         libglib2.0-0 \
         tzdata \
@@ -84,7 +89,16 @@ scikit-learn \
 open3d \
 cython \
 setuptools \
-wheel
+wheel \
+pyacvd \
+pykdtree \
+veco 
+
+#visualizations with pyvista
+RUN pip install "pyvista[jupyter]"
+
+#other python packages that are cooperating with pip
+RUN conda install -y -c conda-forge rtree
 
 #install snakemake
 RUN pip install --no-cache-dir snakemake \
@@ -93,5 +107,4 @@ RUN pip install --no-cache-dir snakemake \
     graphviz
 
 #install R packages
-RUN R -e "install.packages(c('tidyverse','data.table', 'devtools', 'vcdExtra'), repos='https://cloud.r-project.org')"
-#next time add Hmisc, kableExtra, arsenal, gtsummary
+RUN R -e "install.packages(c('tidyverse','data.table', 'devtools', 'vcdExtra', 'Hmisc', 'kableExtra', 'arsenal', 'gtsummary'), repos='https://cloud.r-project.org')"
