@@ -61,7 +61,10 @@ RUN apt-get update && \
 	# development tools (originally needed for pygco) 
 	build-essential \
 	wget \
-	unzip && \
+	unzip \
+	#pcl and tools for building c++ functions
+	cmake \
+	libpcl-dev && \
     \
     # Add CRAN GPG key and repository
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 51716619E084DAB9 && \
