@@ -30,3 +30,5 @@ This container was made to facilitate pygco specifically. Once the container is 
 * run the make file. The command is "make". NOTE: this will print a lot of warning messages but do not frett, it does work!
 
 Now you can use this package. 
+
+This package now has c++ function building capabilities as well as point cloud library (pcl)
