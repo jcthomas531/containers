@@ -13,7 +13,8 @@ I am hope that I can keep this container as a sort of general catch all for many
 
 This is also able to run my package mysticOwl.
 
-Able to render markdown files. In the dockerfile there is a line to install tinytex however it doesnt put it in the right place so when you move the .sif where you want it run "tinytex::install_tinytex()"
+Able to render markdown files.
+
 
 ## Tarkir - tarkirBuildFIles
 

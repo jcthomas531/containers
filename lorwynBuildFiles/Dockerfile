@@ -12,6 +12,16 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=America/Chicago
 
 
+# Fixed location for TinyTeX inside the container.
+# Keeping this independent of $HOME prevents problems when the
+# container is run through Apptainer/Singularity or qsub.
+ENV TINYTEX_DIR=/opt/TinyTeX
+
+# Make TinyTeX's Linux binaries available to all users/processes.
+ENV PATH="${TINYTEX_DIR}/bin/x86_64-linux:${PATH}"
+
+
+
 #installs latest version of R
 RUN apt-get update && \
     apt-get install -y \
@@ -52,7 +62,16 @@ RUN apt-get update && \
         zlib1g-dev \
         libbz2-dev \
         liblzma-dev \
-        libreadline-dev && \
+        libreadline-dev \
+	\
+	# Required for TinyTeX
+        perl \
+        wget \
+        xz-utils \
+        fontconfig \
+	\
+	# RMarkdown/PDF rendering
+        pandoc && \
     \
     # Add CRAN GPG key and repository
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 51716619E084DAB9 && \
@@ -86,5 +105,87 @@ RUN pip install --no-cache-dir snakemake \
     graphviz
 
 #install R packages
-RUN R -e "install.packages(c('tidyverse','data.table', 'devtools', 'vcdExtra'), repos='https://cloud.r-project.org')"
-#next time add Hmisc, kableExtra, arsenal, gtsummary
+ENV R_LIBS_SITE=/usr/local/lib/R/site-library
+RUN R -e "install.packages(c('tidyverse','data.table', 'devtools', 'vcdExtra', 'Hmisc', 'kableExtra', 'arsenal', 'gtsummary', 'rmarkdown', 'knitr', 'tinytex', 'here', 'openxlsx', 'duckdb', 'DBI', 'remotes', 'pak', 'BiocManager', 'stringr', 'emmeans', 'tidyr'), repos='https://cloud.r-project.org')"
+RUN R -e "library(rmarkdown); print(pandoc_available()); print(pandoc_version())"
+RUN R -e "pak::pak('jcthomas531/mysticOwl')"
+RUN R -e "BiocManager::install('Biobase', update = FALSE, ask = FALSE)"
+
+
+
+# ------------------------------------------------------------------
+# TinyTeX / LaTeX
+# ------------------------------------------------------------------
+
+# Install TinyTeX into a fixed system location rather than under
+# the user's HOME directory.
+#
+# tinytex::install_tinytex() normally installs to ~/.TinyTeX on
+# Linux. We explicitly override that location here so that the
+# installation is independent of whoever runs the container.
+
+#changing to a version of tinytex that comes with all latex packages on CTAN pre-installed in an attempt
+#to avoid having to rebuild the container image for every package i have forgotten to install
+#the commented out section below is the previous method of installing tinytex and then adding individual packages
+
+#RUN R -e "tinytex::install_tinytex(dir = Sys.getenv('TINYTEX_DIR'), bundle = 'TinyTeX', add_path = FALSE)"
+#RUN R -e "tinytex::tlmgr_install(c( \
+#'xltabular', \
+#'booktabs', \
+#'longtable', \
+#'array', \
+#'multirow', \
+#'wrapfig', \
+#'float', \
+#'colortbl', \
+#'pdflscape', \
+#'threeparttable', \
+#'threeparttablex', \
+#'makecell' \
+#))"
+
+RUN R -e "tinytex::install_tinytex(dir = Sys.getenv('TINYTEX_DIR'), bundle = 'TinyTeX-2', add_path = FALSE)"
+
+
+# ------------------------------------------------------------------
+# Verify LaTeX installation during the image build
+# ------------------------------------------------------------------
+
+RUN echo "PATH=${PATH}" && \
+    which pandoc && \
+    pandoc --version && \
+    test -x "${TINYTEX_DIR}/bin/x86_64-linux/pdflatex" && \
+    "${TINYTEX_DIR}/bin/x86_64-linux/pdflatex" --version && \
+    which pdflatex
+
+
+RUN Rscript -e " \
+    print(Sys.getenv('PATH')); \
+    print(Sys.which('pandoc')); \
+    print(Sys.which('pdflatex')); \
+    print(tinytex::tinytex_root()); \
+    print(tinytex::is_tinytex()); \
+    stopifnot(Sys.which('pdflatex') != '') \
+"
+
+
+# ------------------------------------------------------------------
+# Make sure the container's R environment also sees TinyTeX
+# ------------------------------------------------------------------
+
+RUN Rscript -e "stopifnot(Sys.which('pdflatex') != '')"
+
+
+#final check
+RUN R -e "print(tinytex::is_tinytex())"
+
+# ------------------------------------------------------------------
+# Final cleanup
+# ------------------------------------------------------------------
+
+RUN apt-get clean && \
+    rm -rf /tmp/* /var/tmp/*
+
+
+
+
