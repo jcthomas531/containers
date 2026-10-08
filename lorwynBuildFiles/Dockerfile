@@ -96,7 +96,15 @@ plyfile \
 pyvista \
 tqdm \
 scikit-learn \
-open3d
+open3d \
+scipy \
+xgboost \
+lightgbm \
+catboost \
+statsmodels \
+shap \
+optuna \
+joblib 
 
 #install snakemake
 RUN pip install --no-cache-dir snakemake \
@@ -106,7 +114,7 @@ RUN pip install --no-cache-dir snakemake \
 
 #install R packages
 ENV R_LIBS_SITE=/usr/local/lib/R/site-library
-RUN R -e "install.packages(c('tidyverse','data.table', 'devtools', 'vcdExtra', 'Hmisc', 'kableExtra', 'arsenal', 'gtsummary', 'rmarkdown', 'knitr', 'tinytex', 'here', 'openxlsx', 'duckdb', 'DBI', 'remotes', 'pak', 'BiocManager', 'stringr', 'emmeans', 'tidyr'), repos='https://cloud.r-project.org')"
+RUN R -e "install.packages(c('tidyverse','data.table', 'devtools', 'vcdExtra', 'Hmisc', 'kableExtra', 'arsenal', 'gtsummary', 'rmarkdown', 'knitr', 'tinytex', 'here', 'openxlsx', 'duckdb', 'DBI', 'remotes', 'pak', 'BiocManager', 'stringr', 'emmeans', 'tidyr', 'MachineShop', 'doSNOW', 'doParallel', 'xgboost', 'ranger', 'glmnet', 'rpart', 'kernlab', 'recipes', 'rsample', 'yardstick', 'pROC', 'future', 'future.apply'), repos='https://cloud.r-project.org')"
 RUN R -e "library(rmarkdown); print(pandoc_available()); print(pandoc_version())"
 RUN R -e "pak::pak('jcthomas531/mysticOwl')"
 RUN R -e "BiocManager::install('Biobase', update = FALSE, ask = FALSE)"

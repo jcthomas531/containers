@@ -11,10 +11,67 @@ Because you need root access to build containers, all of the work to make and bu
 
 I am hope that I can keep this container as a sort of general catch all for many needs. I built it off of a container on docker: https://hub.docker.com/r/pytorch/pytorch and then added some python packages with 3d mesh tools on top of that.
 
-This is also able to run my package mysticOwl.
+This is also contains my package mysticOwl.
 
 Able to render markdown files.
 
+Python packages:
+
+* pandas
+* numpy
+* trimesh
+* plyfile
+* pyvista
+* tqdm
+* scikit-learn
+* open3d
+* scipy
+* xgboost
+* lightgbm
+* catboost
+* statsmodels
+* shap
+* optuna
+* joblib 
+
+R packages:
+
+* mysticOwl
+* tidyverse
+* data.table
+* devtools
+* vcdExtra
+* Hmisc
+* kableExtra
+* arsenal 
+* gtsummary 
+* rmarkdown 
+* knitr 
+* tinytex 
+* here 
+* openxlsx 
+* duckdb 
+* DBI 
+* remotes 
+* pak 
+* BiocManager 
+* stringr 
+* emmeans 
+* tidyr 
+* MachineShop 
+* doSNOW 
+* doParallel 
+* xgboost 
+* ranger 
+* glmnet 
+* rpart 
+* kernlab 
+* recipes 
+* rsample 
+* yardstick 
+* pROC 
+* future 
+* future.apply
 
 ## Tarkir - tarkirBuildFIles
 
