@@ -79,7 +79,7 @@ R, built off tidyverse container on docker. Also includes some of my commonly us
 
 ## lorwyn_eclipsed - lorwyn_eclipsedBuildFiles
 
-Built off a copy of lorwyn at commit 3028374. Added some additional development software needed to build a specific package from a github repo (https://github.com/amueller/gco_python).
+Built off a copy of lorwyn at commit 3028374. Added some additional development software needed to build a specific package from a github repo (https://github.com/amueller/gco_python). Generally diverges from lorwyn as a more development and computational contianer whereas lorwyn has functionality for like rmarkdowns and outputting things. It is also not set up to run my package mysticOwl
 
 This container was made to facilitate pygco specifically. Once the container is built and you have the .sif, do the following IN THE CONTAINER to make pygco available as a python package:
 
@@ -90,3 +90,61 @@ This container was made to facilitate pygco specifically. Once the container is 
 Now you can use this package. 
 
 This package now has c++ function building capabilities as well as point cloud library (pcl)
+
+### Pythom packages
+
+* pandas
+* numpy
+* trimesh
+* plyfile 
+* pyvista 
+* tqdm 
+* scikit-learn 
+* open3d 
+* cython 
+* setuptools 
+* wheel 
+* pyacvd 
+* pykdtree 
+* veco 
+* scipy 
+* xgboost 
+* lightgbm 
+* catboost 
+* statsmodels 
+* shap 
+* optuna 
+* joblib
+
+### R packages
+
+* tidyverse 
+* data.table 
+* devtools 
+* vcdExtra 
+* Hmisc 
+* kableExtra 
+* arsenal 
+* gtsummary 
+* here 
+* openxlsx 
+* remotes 
+* pak 
+* BiocManager 
+* stringr 
+* emmeans 
+* tidyr 
+* MachineShop 
+* doSNOW 
+* doParallel 
+* xgboost 
+* ranger 
+* glmnet 
+* rpart 
+* kernlab 
+* recipes 
+* rsample 
+* yardstick 
+* pROC 
+* future 
+* future.apply

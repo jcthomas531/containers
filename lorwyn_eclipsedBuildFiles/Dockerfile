@@ -1,3 +1,4 @@
+
 FROM pytorch/pytorch:2.9.0-cuda12.8-cudnn9-runtime 
 MAINTAINER JC Thomas "jc-thomas@uiowa.edu"  
 # Install some basic software 
@@ -95,7 +96,15 @@ setuptools \
 wheel \
 pyacvd \
 pykdtree \
-veco 
+veco \
+scipy \
+xgboost \
+lightgbm \
+catboost \
+statsmodels \
+shap \
+optuna \
+joblib
 
 #visualizations with pyvista
 RUN pip install "pyvista[jupyter]"
@@ -110,4 +119,4 @@ RUN pip install --no-cache-dir snakemake \
     graphviz
 
 #install R packages
-RUN R -e "install.packages(c('tidyverse','data.table', 'devtools', 'vcdExtra', 'Hmisc', 'kableExtra', 'arsenal', 'gtsummary'), repos='https://cloud.r-project.org')"
+RUN R -e "install.packages(c('tidyverse','data.table', 'devtools', 'vcdExtra', 'Hmisc', 'kableExtra', 'arsenal', 'gtsummary', 'here', 'openxlsx', 'remotes', 'pak', 'BiocManager', 'stringr', 'emmeans', 'tidyr', 'MachineShop', 'doSNOW', 'doParallel', 'xgboost', 'ranger', 'glmnet', 'rpart', 'kernlab', 'recipes', 'rsample', 'yardstick', 'pROC', 'future', 'future.apply'), repos='https://cloud.r-project.org')"
